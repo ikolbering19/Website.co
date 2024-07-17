@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Logout Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="loginContainer">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username" required><br><br>
+            <input type="password" id="password" placeholder="Password" required><br><br>
+            <button type="submit">Login</button>
+        </form>
+        <p id="loginError" class="hidden">Incorrect username or password.</p>
+    </div>
+
+    <div id="welcomeContainer" class="hidden">
+        <h2>Welcome, <span id="loggedInUser"></span>!</h2>
+        <button id="logoutButton">Logout</button>
+    </div>
+
+    <script>
+        // Simulated user credentials (in a real scenario, use server-side validation and storage)
+        const validUsername = "claudine";
+        const validPassword = "calme";
+
+        // Login form submission handling
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === validUsername && password === validPassword) {
+                // Successful login
+                document.getElementById('loginContainer').classList.add('hidden');
+                document.getElementById('welcomeContainer').classList.remove('hidden');
+                document.getElementById('loggedInUser').textContent = username;
+                document.getElementById('loginError').classList.add('hidden');
+            } else {
+                // Failed login
+                document.getElementById('loginError').classList.remove('hidden');
+            }
+        });
+
+        // Logout button handling
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            document.getElementById('welcomeContainer').classList.add('hidden');
+            document.getElementById('loginContainer').classList.remove('hidden');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        });
+    </script>
+</body>
+</html>
